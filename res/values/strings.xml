@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Android Home Task</string>
+    <string name="build_button">Build Input Data</string>
+    <string name="sort_button">Sort Input Data</string>
+    <string name="validate_button">Validate Sorted Data</string>
+    <string name="settings_button">Settings</string>
+</resources>
