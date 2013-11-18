@@ -1,6 +1,5 @@
-package ru.mlarinsky.interview.devex.model.streaming;
+package ru.mlarinsky.interview.devex.streaming;
 
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**

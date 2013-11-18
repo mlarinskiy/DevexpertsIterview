@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<color name="main_background">#FF0000</color><color name="progress_background">#d3d3d3</color></resources>
+    <color name="main_background">#2B1B17</color>
+</resources>

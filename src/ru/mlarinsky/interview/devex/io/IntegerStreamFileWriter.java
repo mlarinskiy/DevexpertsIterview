@@ -1,7 +1,7 @@
 package ru.mlarinsky.interview.devex.io;
 
 import android.util.Log;
-import ru.mlarinsky.interview.devex.model.streaming.IntegerStream;
+import ru.mlarinsky.interview.devex.streaming.IntegerStream;
 
 import java.io.*;
 
@@ -31,11 +31,11 @@ public class IntegerStreamFileWriter {
 			if (dos != null) {
 				try {
 					dos.close();
-					listener.onStreamWritten();
 				} catch (IOException e) {
 					Log.e(TAG, ON_CLOSE_ERROR_PREFIX + filePath, e);
 				}
 			}
+			listener.onStreamWritten();
 		}
 	}
 

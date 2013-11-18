@@ -1,4 +1,4 @@
-package ru.mlarinsky.interview.devex.model.streaming;
+package ru.mlarinsky.interview.devex.streaming;
 
 import android.util.Log;
 

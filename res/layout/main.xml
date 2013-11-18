@@ -22,11 +22,13 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/validate_button"
-                android:id="@+id/validate_button"/>
+                android:id="@+id/validate_button"
+                android:onClick="validateSortedData"/>
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_button"
+                android:onClick="settings"
                 android:id="@+id/settings_button" android:layout_gravity="center" android:layout_marginTop="20dp"/>
     </LinearLayout>
 </FrameLayout>

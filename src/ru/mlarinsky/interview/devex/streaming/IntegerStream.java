@@ -1,6 +1,4 @@
-package ru.mlarinsky.interview.devex.model.streaming;
-
-import java.util.Iterator;
+package ru.mlarinsky.interview.devex.streaming;
 
 /**
  * @author Mikhail Larinskiy

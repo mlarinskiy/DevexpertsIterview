@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android Home Task</string>
+    <string name="validation_activity_name">Validate Sorting Results</string>
     <string name="build_button">Build Input Data</string>
     <string name="sort_button">Sort Input Data</string>
     <string name="validate_button">Validate Sorted Data</string>
     <string name="settings_button">Settings</string>
+    <string name="last">Last %d Integers</string>
+    <string name="first">First %d Integers</string>
+    <string name="input_settings_label">Input Building</string>
+    <string name="input_size_label">Input Size</string>
+    <string name="dimension_label">kB</string>
+    <string name="sorting_settings_label">Input Sorting</string>
+    <string name="buffer_size_label">Buffer Size</string>
+    <string name="validation_settings_label">Validation</string>
+    <string name="select_first_label">Print first</string>
+    <string name="select_last_label">Print last</string>
+    <string name="integers_label">integers</string>
 </resources>
