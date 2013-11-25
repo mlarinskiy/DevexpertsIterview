@@ -3,32 +3,46 @@
 <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
-        android:background="@color/main_background" android:focusableInTouchMode="true">
+        android:focusableInTouchMode="true"
+        android:clickable="false">
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_gravity="center">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/build_button"
-                android:id="@+id/build_button" android:onClick="buildInputData"/>
+                android:id="@+id/build_button"
+                android:onClick="onClick"
+                style="@android:style/Theme.Holo"
+                />
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/sort_button"
-                android:id="@+id/sort_button" android:onClick="sortInputData" android:longClickable="false"/>
+                android:id="@+id/sort_button"
+                android:onClick="onClick"
+                style="@android:style/Theme.Holo"
+                />
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/validate_button"
                 android:id="@+id/validate_button"
-                android:onClick="validateSortedData"/>
+                android:onClick="onClick"
+                style="@android:style/Theme.Holo"
+                />
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/settings_button"
-                android:onClick="settings"
-                android:id="@+id/settings_button" android:layout_gravity="center" android:layout_marginTop="20dp"/>
+                android:onClick="onClick"
+                android:id="@+id/settings_button"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                style="@android:style/Theme.Holo"
+                />
     </LinearLayout>
 </FrameLayout>

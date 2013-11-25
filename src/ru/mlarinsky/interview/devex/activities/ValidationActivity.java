@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import ru.mlarinsky.interview.devex.R;
-import ru.mlarinsky.interview.devex.controller.Settings;
 
 /**
  * @author Mikhail Larinskiy

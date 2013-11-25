@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import ru.mlarinsky.interview.devex.R;
-import ru.mlarinsky.interview.devex.controller.Settings;
 
 /**
  * @author Mikhail Larinskiy
@@ -43,18 +42,6 @@ public class SettingsActivity extends Activity {
 
 	public void selectLast(View view) {
 		Settings.instance().setFirstSelected(false);
-	}
-
-	public void setInputSize(View view) {
-
-	}
-
-	public void setFirstDepth(View view) {
-
-	}
-
-	public void setLastDepth(View view) {
-
 	}
 
 	private void init() {

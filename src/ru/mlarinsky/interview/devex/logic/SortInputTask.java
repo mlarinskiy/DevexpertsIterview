@@ -1,6 +1,7 @@
-package ru.mlarinsky.interview.devex.controller;
+package ru.mlarinsky.interview.devex.logic;
 
 import android.util.Log;
+import ru.mlarinsky.interview.devex.activities.Settings;
 import ru.mlarinsky.interview.devex.io.IntegerStreamFileWriter;
 import ru.mlarinsky.interview.devex.streaming.IntegerArrayStream;
 import ru.mlarinsky.interview.devex.streaming.IntegerFileStream;
@@ -11,12 +12,10 @@ import java.io.File;
 import java.util.Arrays;
 
 /**
- * Sorts input file containing integers only.
- *
  * @author Mikhail Larinskiy
  */
-public class MergeSort implements IntegerStreamFileWriter.CallbackListener {
-	private static final String TAG = MergeSort.class.getSimpleName();
+public class SortInputTask extends BaseTask<String> implements IntegerStreamFileWriter.CallbackListener {
+	private static final String TAG = SortInputTask.class.getSimpleName();
 	private static final String SORT_ERROR_MESSAGE = "Failed to sort input data.";
 	private static final String DELETE_TMP_ERROR_MESSAGE = "Failed to delete tmp file ";
 
@@ -26,25 +25,24 @@ public class MergeSort implements IntegerStreamFileWriter.CallbackListener {
 	private final IntegerFileStream inputStream = new IntegerFileStream();
 	private final IntegerFileStream sortedStream = new IntegerFileStream();
 
-	private final int bufferSize;
-	private final CallbackListener callbackListener;
-
+	private int bufferSize;
 	private String mergedFileName;
 	private String mergedFileNameHolder;
 
-	public MergeSort(int bufferSize, String sortedFileNamePrefix, CallbackListener callbackListener) {
-		this.bufferSize = bufferSize;
-		this.callbackListener = callbackListener;
+	public SortInputTask() {
+		super(TAG);
+	}
 
-		mergedFileName = sortedFileNamePrefix;
-		mergedFileNameHolder = sortedFileNamePrefix + HOLDER_FILE_SUFFIX;
+	// ---------------- IntegerStreamFileWriter callbacks implementation ---------------
+	@Override
+	public void onNextWritten() {
+		publishProgress(getProgress());
 	}
 
 	@Override
 	public void onStreamWritten() {
 		// If all input has been read stop sorting and return the result
 		if (!inputStream.hasNext()) {
-			callbackListener.onSortingFinished(mergedFileName);
 			cleanUp(); // Don't forget to cleanup!
 			return;
 		}
@@ -53,7 +51,36 @@ public class MergeSort implements IntegerStreamFileWriter.CallbackListener {
 		mergeInputWith(mergedFileName);
 	}
 
-	public void sort(String inputFilePath) {
+	// ---------------- AsynchronousTask callbacks implementation ----------------
+	@Override
+	protected void onPreExecute() {
+		// Size = size_in_kilobytes * 1000 / integer_size
+		int bufferSizeInKilobytes = Settings.instance().getBufferSize();
+		bufferSize = bufferSizeInKilobytes * Settings.INPUT_SIZE_MULTIPLIER;
+
+		// Input size is a sum of arithmetic progression of merged buffers sizes
+		int inputSizeInKilobytes = Settings.instance().getInputSize();
+		int n = inputSizeInKilobytes / bufferSizeInKilobytes;
+		taskSize = (n * (bufferSizeInKilobytes + inputSizeInKilobytes) / 2) * Settings.INPUT_SIZE_MULTIPLIER;
+
+		super.onPreExecute();
+	}
+
+
+	@Override
+	protected String doInBackground(String... params) {
+		String inputFileName = params[0];
+		String sortedFileNamePrefix = params[1];
+
+		mergedFileName = sortedFileNamePrefix;
+		mergedFileNameHolder = sortedFileNamePrefix + HOLDER_FILE_SUFFIX;
+
+		sort(inputFileName);
+		return mergedFileName;
+	}
+
+	// ---------------- Logic implementation ----------------
+	private void sort(String inputFilePath) {
 		try {
 			inputStream.open(inputFilePath);
 
@@ -110,9 +137,5 @@ public class MergeSort implements IntegerStreamFileWriter.CallbackListener {
 		boolean resultHolderDeleted = new File(mergedFileNameHolder).delete();
 		if (!resultHolderDeleted)
 			Log.e(TAG, DELETE_TMP_ERROR_MESSAGE + mergedFileNameHolder);
-	}
-
-	public interface CallbackListener {
-		void onSortingFinished(String sortedFileName);
 	}
 }

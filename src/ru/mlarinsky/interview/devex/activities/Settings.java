@@ -1,4 +1,4 @@
-package ru.mlarinsky.interview.devex.controller;
+package ru.mlarinsky.interview.devex.activities;
 
 import android.os.Bundle;
 

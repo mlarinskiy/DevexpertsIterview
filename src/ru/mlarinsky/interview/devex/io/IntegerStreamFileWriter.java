@@ -23,8 +23,10 @@ public class IntegerStreamFileWriter {
 		DataOutputStream dos = null;
 		try {
 			dos = new DataOutputStream(new FileOutputStream(filePath));
-			while (stream.hasNext())
+			while (stream.hasNext()) {
 				dos.writeInt(stream.next());
+				listener.onNextWritten();
+			}
 		} catch (IOException e) {
 			Log.e(TAG, ON_WRITE_ERROR_PREFIX + filePath, e);
 		} finally {
@@ -40,6 +42,7 @@ public class IntegerStreamFileWriter {
 	}
 
 	public interface CallbackListener {
+		void onNextWritten();
 		void onStreamWritten();
 	}
 }
