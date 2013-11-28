@@ -6,15 +6,37 @@
     <string name="sort_button">Sort Input Data</string>
     <string name="validate_button">Validate Sorted Data</string>
     <string name="settings_button">Settings</string>
-    <string name="last">Last %d Integers</string>
-    <string name="first">First %d Integers</string>
+    <string name="settings_fragment_label">Settings</string>
+
+    <string name="ok_label">OK</string>
+    <string name="cancel_label">Cancel</string>
+    <string name="out_of_limits_error_message_pattern">Value must be in [%1$d, %2$d] interval</string>
+    <string name="from_is_too_big_error_message">From value must be smaller than To value</string>
+    <string name="to_is_too_big_error_message">To value must be smaller than Input size value</string>
+    <string name="to_is_too_small_error_message">To value must be bigger than From value</string>
+
     <string name="input_settings_label">Input Building</string>
     <string name="input_size_label">Input Size</string>
-    <string name="dimension_label">kB</string>
+    <string name="input_size_dialog_title">Input size in integers</string>
+    <string name="input_size_summary_pattern">Input file contains %d integers</string>
+    <string name="input_size_key">input_size_key</string>
+
     <string name="sorting_settings_label">Input Sorting</string>
     <string name="buffer_size_label">Buffer Size</string>
-    <string name="validation_settings_label">Validation</string>
-    <string name="select_first_label">Print first</string>
-    <string name="select_last_label">Print last</string>
-    <string name="integers_label">integers</string>
+    <string name="buffer_size_dialog_title">Buffer size in integers</string>
+    <string name="buffer_size_summary_pattern">It is possible to read %d integers at a time</string>
+    <string name="buffer_size_key">buffer_size_key</string>
+
+    <string name="verification_settings_group_label">Verification</string>
+    <string name="verification_activity_title_pattern">Sorted integers from %1$d one up to %2$d</string>
+
+    <string name="from_label">From</string>
+    <string name="from_dialog_title">Start from</string>
+    <string name="from_summary_pattern">Start print validation data from %d one</string>
+    <string name="from_key">from_key</string>
+
+    <string name="to_label">To</string>
+    <string name="to_dialog_title">Up to</string>
+    <string name="to_summary_pattern">Print validation data up to %d one</string>
+    <string name="to_key">to_key</string>
 </resources>

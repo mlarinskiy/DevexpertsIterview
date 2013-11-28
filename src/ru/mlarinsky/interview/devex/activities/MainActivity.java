@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import ru.mlarinsky.interview.devex.R;
 import ru.mlarinsky.interview.devex.logic.*;
+import ru.mlarinsky.interview.devex.settings.Settings;
 
 public class MainActivity extends Activity implements Controller.Listener {
-	public static final String VALIDATION_DATA_KEY = "VALIDATION_DATA";
+	public static final String VERIFICATION_DATA_KEY = "VALIDATION_DATA";
 	private static final String SORTED_FILE_NAME_KEY = "SORTED_FILE_NAME";
 	private static final String IS_DATA_AVAILABLE_KEY = "IS_DATA_AVAILABLE";
 	private static final String IS_DATA_SORTED_KEY = "IS_DATA_SORTED";
@@ -48,8 +49,6 @@ public class MainActivity extends Activity implements Controller.Listener {
 		savedState.putString(SORTED_FILE_NAME_KEY, sortedFileName);
 		savedState.putBoolean(IS_DATA_AVAILABLE_KEY, sortButton.isEnabled());
 		savedState.putBoolean(IS_DATA_SORTED_KEY, validateButton.isEnabled());
-
-		Settings.instance().saveState(savedState);
 	}
 
 	@Override
@@ -59,8 +58,6 @@ public class MainActivity extends Activity implements Controller.Listener {
 	}
 
 	private void restore(Bundle savedState) {
-		Settings.instance().restore(savedState);
-
 		if (savedState != null) {
 			sortedFileName = savedState.getString(SORTED_FILE_NAME_KEY);
 			sortButton.setEnabled(savedState.getBoolean(IS_DATA_AVAILABLE_KEY));
@@ -74,6 +71,7 @@ public class MainActivity extends Activity implements Controller.Listener {
 	// -------------- User input action callback implementation --------------
 	@SuppressWarnings("unchecked")
 	public void onClick(View view) {
+		Settings settings = new Settings(this);
 		String progressDialogTitle;
 		TaskListener taskResultListener;
 		String[] params;
@@ -84,7 +82,7 @@ public class MainActivity extends Activity implements Controller.Listener {
 				params = new String[]{
 						getFileStreamPath(INPUT_NAME).getAbsolutePath()
 				};
-				task = new BuildInputTask();
+				task = new BuildInputTask(settings);
 				taskResultListener = new BuildInputDataTaskListener();
 				break;
 			case R.id.sort_button:
@@ -93,7 +91,7 @@ public class MainActivity extends Activity implements Controller.Listener {
 						getFileStreamPath(INPUT_NAME).getAbsolutePath(),
 						getFileStreamPath(OUTPUT_NAME).getAbsolutePath()
 				};
-				task = new SortInputTask();
+				task = new SortInputTask(settings);
 				taskResultListener = new SortInputTaskListener();
 				break;
 			case R.id.validate_button:
@@ -101,11 +99,11 @@ public class MainActivity extends Activity implements Controller.Listener {
 				params = new String[]{
 						sortedFileName
 				};
-				task = new BuildVerificationDataTask();
+				task = new BuildVerificationDataTask(settings);
 				taskResultListener = new BuildVerificationDataTaskListener();
 				break;
 			case R.id.settings_button:
-				Intent intent = new Intent(this, SettingsActivity.class);
+				Intent intent = new Intent(this, SettingsFragmentActivity.class);
 				startActivity(intent);
 				return;
 			default:
@@ -143,8 +141,8 @@ public class MainActivity extends Activity implements Controller.Listener {
 
 	@Override
 	public void onVerificationDataBuildEnd(String[] verificationDataLabels) {
-		Intent intent = new Intent(MainActivity.this, ValidationActivity.class);
-		intent.putExtra(VALIDATION_DATA_KEY, verificationDataLabels);
+		Intent intent = new Intent(MainActivity.this, VerificationActivity.class);
+		intent.putExtra(VERIFICATION_DATA_KEY, verificationDataLabels);
 		startActivity(intent);
 	}
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="SizeSettingInput" parent="android:TextAppearance">
+        <item name="android:inputType">number</item>
+        <item name="android:singleLine">true</item>
+
+        <item name="android:positiveButtonText">@string/ok_label</item>
+        <item name="android:negativeButtonText">@string/cancel_label</item>
+    </style>
+</resources>

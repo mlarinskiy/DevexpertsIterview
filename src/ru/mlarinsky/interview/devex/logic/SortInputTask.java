@@ -1,7 +1,7 @@
 package ru.mlarinsky.interview.devex.logic;
 
 import android.util.Log;
-import ru.mlarinsky.interview.devex.activities.Settings;
+import ru.mlarinsky.interview.devex.settings.Settings;
 import ru.mlarinsky.interview.devex.io.IntegerStreamFileWriter;
 import ru.mlarinsky.interview.devex.streaming.IntegerArrayStream;
 import ru.mlarinsky.interview.devex.streaming.IntegerFileStream;
@@ -29,8 +29,8 @@ public class SortInputTask extends BaseTask<String> implements IntegerStreamFile
 	private String mergedFileName;
 	private String mergedFileNameHolder;
 
-	public SortInputTask() {
-		super(TAG);
+	public SortInputTask(Settings settings) {
+		super(TAG, settings);
 	}
 
 	// ---------------- IntegerStreamFileWriter callbacks implementation ---------------
@@ -54,14 +54,12 @@ public class SortInputTask extends BaseTask<String> implements IntegerStreamFile
 	// ---------------- AsynchronousTask callbacks implementation ----------------
 	@Override
 	protected void onPreExecute() {
-		// Size = size_in_kilobytes * 1000 / integer_size
-		int bufferSizeInKilobytes = Settings.instance().getBufferSize();
-		bufferSize = bufferSizeInKilobytes * Settings.INPUT_SIZE_MULTIPLIER;
+		bufferSize = settings.getBufferSize();
 
 		// Input size is a sum of arithmetic progression of merged buffers sizes
-		int inputSizeInKilobytes = Settings.instance().getInputSize();
-		int n = inputSizeInKilobytes / bufferSizeInKilobytes;
-		taskSize = (n * (bufferSizeInKilobytes + inputSizeInKilobytes) / 2) * Settings.INPUT_SIZE_MULTIPLIER;
+		int inputSize = settings.getInputSize();
+		int n = inputSize / bufferSize;
+		taskSize = (n * (bufferSize + inputSize) / 2);
 
 		super.onPreExecute();
 	}

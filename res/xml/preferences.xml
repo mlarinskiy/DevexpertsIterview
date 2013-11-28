@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+            style="@style/SizeSettingInput"
+            android:key="@string/input_size_key"
+            android:title="@string/input_size_label"
+            android:dialogTitle="@string/input_size_dialog_title"
+            android:defaultValue="25000"/>
+    <EditTextPreference
+            style="@style/SizeSettingInput"
+            android:key="@string/buffer_size_key"
+            android:title="@string/buffer_size_label"
+            android:dialogTitle="@string/buffer_size_dialog_title"
+            android:defaultValue="2500"/>
+    <PreferenceCategory
+            android:title="@string/verification_settings_group_label">
+        <EditTextPreference
+                style="@style/SizeSettingInput"
+                android:key="@string/from_key"
+                android:title="@string/from_label"
+                android:dialogTitle="@string/from_dialog_title"
+                android:defaultValue="@integer/from_min"/>
+        <EditTextPreference
+                style="@style/SizeSettingInput"
+                android:key="@string/to_key"
+                android:title="@string/to_label"
+                android:dialogTitle="@string/to_dialog_title"
+                android:defaultValue="@integer/to_min"/>
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="input_size_min">1</integer>
+    <integer name="input_size_max">1000000</integer>
+    <integer name="buffer_size_min">@integer/input_size_min</integer>
+    <integer name="buffer_size_max">@integer/input_size_max</integer>
+    <integer name="from_min">1</integer>
+    <integer name="from_max">@integer/input_size_max</integer>
+    <integer name="to_min">@integer/from_min</integer>
+    <integer name="to_max">@integer/from_max</integer>
+</resources>

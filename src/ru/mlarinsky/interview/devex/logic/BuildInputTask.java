@@ -1,7 +1,8 @@
 package ru.mlarinsky.interview.devex.logic;
 
+
 import android.util.Log;
-import ru.mlarinsky.interview.devex.activities.Settings;
+import ru.mlarinsky.interview.devex.settings.Settings;
 import ru.mlarinsky.interview.devex.io.IntegerStreamFileWriter;
 import ru.mlarinsky.interview.devex.streaming.IntegerRandomStream;
 
@@ -13,8 +14,8 @@ import ru.mlarinsky.interview.devex.streaming.IntegerRandomStream;
 public class BuildInputTask extends BaseTask<Void> {
 	private static final String TAG = BuildInputTask.class.getSimpleName();
 
-	public BuildInputTask() {
-		super(TAG);
+	public BuildInputTask(Settings settings) {
+		super(TAG, settings);
 	}
 
 	private IntegerStreamFileWriter inputDataFileWriter;
@@ -22,8 +23,7 @@ public class BuildInputTask extends BaseTask<Void> {
 
 	@Override
 	protected void onPreExecute() {
-		// Input size = size_in_kilobytes * 1000 / integer_size
-		taskSize = Settings.instance().getInputSize() * Settings.INPUT_SIZE_MULTIPLIER;
+		taskSize = settings.getInputSize();
 
 		// Build integer randomiser
 		randomStream = new IntegerRandomStream(taskSize);

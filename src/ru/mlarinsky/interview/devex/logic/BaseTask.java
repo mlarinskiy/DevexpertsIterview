@@ -2,6 +2,7 @@ package ru.mlarinsky.interview.devex.logic;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import ru.mlarinsky.interview.devex.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,15 @@ import java.util.List;
  */
 public abstract class BaseTask<T> extends AsyncTask<String, Integer, T> {
 	protected final String tag;
+	protected final Settings settings;
 	protected final List<TaskListener<T>> taskListeners = new ArrayList<TaskListener<T>>();
 
 	protected int progressCounter;
 	protected int taskSize;
 
-	protected BaseTask(String tag) {
+	protected BaseTask(String tag, Settings settings) {
 		this.tag = tag;
+		this.settings = settings;
 	}
 
 	public void addListener(TaskListener<T> listener) {
